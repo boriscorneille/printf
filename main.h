@@ -79,8 +79,9 @@ int print_pointer(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 
 /* Funciotns to handle other specifiers */
-int get_flags(const char *format, int *i);
-int get_width(const char *format, int *i, va_list list);
-int get_precision(const char *format, int *i, va_list list);
+int g_flag(const char *frmt, int *x);
+int g_width(const char *frmt, int *x, va_list lst);
+int g_precision(const char *frmt, int *x, va_list lst);
+int g_size(const char *frmt, int *x);
 
 #endif
