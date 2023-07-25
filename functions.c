@@ -1,155 +1,157 @@
 #include "main.h"
 
 /**
- * print_unsigned - Print an unsigned integer number
+ * p_unsigned - Print an unsigned integer number
  * @types: va_list containing the argument to print
- * @buffer: Buffer to store the resulting string
- * @flags: Formatting flags
- * @width: Minimum field width
- * @precision: Minimum number of digits to be printed
- * @size: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
+ * @buf: Buffer to store the resulting string
+ * @flg: Formatting flags
+ * @wdth: Minimum field width
+ * @pre: Minimum number of digits to be printed
+ * @s: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
  *
- * Return: The number of characters printed
+ * Return: console characters
  */
-int print_unsigned(va_list types, char buffer[],
-        int flags, int width, int precision, int size)
+int p_unsigned(va_list types, char buf[],
+        int flg, int wdth, int pre, int s)
 {
         int i = BUFF_SIZE - 2;
         unsigned long int num = va_arg(types, unsigned long int);
 
-        num = convert_size_unsgnd(num, size);
+        num = convert_s_unsigned(num, s);
 
         if (num == 0)
-                buffer[i--] = '0';
+                buf[i--] = '0';
 
-        buffer[BUFF_SIZE - 1] = '\0';
+        buf[BUFF_SIZE - 1] = '\0';
 
         while (num > 0) {
-                buffer[i--] = (num % 10) + '0';
+                buf[i--] = (num % 10) + '0';
                 num /= 10;
         }
 
         i++;
 
-        return write_unsgnd(0, i, buffer, flags, width, precision, size);
+        return Enter_unsigned(0, i, buf, flg, wdth, pre, s);
 }
 
 /**
- * print_octal - Print an unsigned number in octal format
+ * p_octal - Print an unsigned number in octal format
  * @types: va_list containing the argument to print
- * @buffer: Buffer to store the resulting string
- * @flags: Formatting flags
- * @width: Minimum field width
- * @precision: Minimum number of digits to be printed
- * @size: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
+ * @buf: Buffer to store the resulting string
+ * @flg: Formatting flags
+ * @wdth: Minimum field width
+ * @pre: Minimum number of digits to be printed
+ * @s: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
  *
  * Return: The number of characters printed
  */
-int print_octal(va_list types, char buffer[],
-        int flags, int width, int precision, int size)
+int p_octal(va_list types, char buf[],
+        int flags, int wdth, int pre, int s)
 {
         int i = BUFF_SIZE - 2;
         unsigned long int num = va_arg(types, unsigned long int);
         unsigned long int init_num = num;
 
-        UNUSED(width);
+        UNUSED(wdth);
 
-        num = convert_size_unsgnd(num, size);
+        num = convert_s_unsigned(num, s);
 
         if (num == 0)
-                buffer[i--] = '0';
+                buf[i--] = '0';
 
-        buffer[BUFF_SIZE - 1] = '\0';
+        buf[BUFF_SIZE - 1] = '\0';
 
         while (num > 0) {
-                buffer[i--] = (num % 8) + '0';
+                buf[i--] = (num % 8) + '0';
                 num /= 8;
         }
 
-        if (flags & F_HASH && init_num != 0)
-                buffer[i--] = '0';
+        if (flg & F_HASH && init_num != 0)
+                buf[i--] = '0';
 
         i++;
 
-        return write_unsgnd(0, i, buffer, flags, width, precision, size);
+        return  Enter_unsigned(0, i, buf, flg, wdth, pre, s);
 }
 
 /**
- * print_hexadecimal - Print an unsigned number in hexadecimal format (lowercase)
- * @types: va_list containing the argument to print
- * @buffer: Buffer to store the resulting string
- * @flags: Formatting flags
- * @width: Minimum field width
- * @precision: Minimum number of digits to be printed
- * @size: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
+ * p_hexdec - show all numbers in hexadecimal format
+ * @types: va_list containing all argumen
+ * @buf: buff memory used to store the resulting string
+ * @flg: frmt flags
+ * @wdth: check field width
+ * @pre: check number of digits to be printed
+ * @s: check Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
  *
- * Return: The number of characters printed
+ * Return: All numbers of characters printed
  */
-int print_hexadecimal(va_list types, char buffer[],
-        int flags, int width, int precision, int size)
+int p_hexdec(va_list types, char buf[],
+        int flg, int wdth, int pre, int s)
 {
-        return print_hexa(types, "0123456789abcdef", buffer,
-                flags, 'x', width, precision, size);
+        return p_hexa(types, "0123456789abcdef", buf,
+                flg, 'x', wdth, pre, s);
 }
 
 /**
- * print_hexa_upper - Print an unsigned number in hexadecimal format (uppercase)
- * @types: va_list containing the argument to print
- * @buffer: Buffer to store the resulting string
- * @flags: Formatting flags
- * @width: Minimum field width
- * @precision: Minimum number of digits to be printed
- * @size: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
+ * p_hex_up - show all numbers in hexadecimal format
+ * @types: va_list containing all argumen
+ * @buf: buff memory used to store the resulting string
+ * @flg: frmt flags
+ * @wdth: check field width
+ * @pre: check number of digits to be printed
+ * @s: check Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
  *
- * Return: The number of characters printed
+ * Return: All numbers of characters printed
  */
-int print_hexa_upper(va_list types, char buffer[],
-        int flags, int width, int precision, int size)
+
+int p_hex_up(va_list types, char buf[],
+        int flg, int wdth, int pre, int s)
 {
-        return print_hexa(types, "0123456789ABCDEF", buffer,
-                flags, 'X', width, precision, size);
+        return p_hexa(types, "0123456789ABCDEF", buf,
+                flg, 'X', wdth, pre, s);
 }
 
+
 /**
- * print_hexa - Print an unsigned number in hexadecimal format
- * @types: va_list containing the argument to print
- * @map_to: Mapping of digits for hexadecimal conversion
- * @buffer: Buffer to store the resulting string
- * @flags: Formatting flags
- * @flag_ch: Character for the hexadecimal flag (e.g., 'x' or 'X')
- * @width: Minimum field width
- * @precision: Minimum number of digits to be printed
- * @size: Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
+ * p_hex_up - show all numbers in hexadecimal format
+ * @types: va_list containing all argumen
+ * @buf: buff memory used to store the resulting string
+ * @flg: frmt flags
+ * flg_ch: flag characters
+ * @wdth: check field width
+ * @pre: check number of digits to be printed
+ * @s: check Size modifier (e.g., 'h', 'l', 'z', 'j', 't')
  *
- * Return: The number of characters printed
+ * Return: All numbers of characters printed
  */
-int print_hexa(va_list types, char map_to[], char buffer[],
-        int flags, char flag_ch, int width, int precision, int size)
+int p_hexa(va_list types, char map_to[],
+char buf[], int flg, char flg_ch, int wdth, int pre, int s)
 {
         int i = BUFF_SIZE - 2;
         unsigned long int num = va_arg(types, unsigned long int);
         unsigned long int init_num = num;
 
-        UNUSED(width);
+        UNUSED(wdth);
 
-        num = convert_size_unsgnd(num, size);
+        num = convert_s_unsigned(num, s);
 
         if (num == 0)
-                buffer[i--] = '0';
+                buf[i--] = '0';
 
-        buffer[BUFF_SIZE - 1] = '\0';
+        buf[BUFF_SIZE - 1] = '\0';
 
         while (num > 0) {
-                buffer[i--] = map_to[num % 16];
+                buf[i--] = map_to[num % 16];
                 num /= 16;
         }
 
-        if (flags & F_HASH && init_num != 0) {
-                buffer[i--] = flag_ch;
-                buffer[i--] = '0';
+        if (flg & F_HASH && init_num != 0) {
+                buf[i--] = flg_ch;
+                buf[i--] = '0';
         }
 
         i++;
 
-        return write_unsgnd(0, i, buffer, flags, width, precision, size);
+        return Enter_unsigned(0, i, buf, flg, wdth, pre, s);
 }
+

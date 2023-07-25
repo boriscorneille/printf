@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * print_pointer - prints a pointer value.
+ * p_pointer - prints a pointer value.
  * @addrs: pointer to be printed.
  * Return: length of the printed pointer.
  */
-int print_pointer(void *addrs)
+int p_pointer(void *addrs)
 {
     unsigned long num_addrs;
     char map_to[] = "0123456789abcdef";
@@ -28,11 +28,11 @@ int print_pointer(void *addrs)
 }
 
 /**
- * print_non_printable - prints non-printable characters.
+ * p_non_pr_able - prints non-printable characters.
  * @str: string to be printed.
  * Return: length of the printed string.
  */
-int print_non_printable(char *str)
+int p_non_pr_able(char *str)
 {
     int i;
     int offset;
@@ -42,11 +42,11 @@ int print_non_printable(char *str)
 
     for (i = 0; str[i] != '\0'; i++)
     {
-        if (is_printable(str[i]))
+        if (is_consolable(str[i]))
             write(1, &str[i], 1);
         else
         {
-            offset = append_hexa_code(str[i], buffer, i);
+            offset = appending_hex_code(str[i], buffer, i);
             write(1, buffer, offset);
         }
     }
@@ -55,11 +55,11 @@ int print_non_printable(char *str)
 }
 
 /**
- * print_reverse - prints a string in reverse.
+ * p_rev - prints a string in reverse.
  * @str: string to be reversed.
  * Return: length of the printed string.
  */
-int print_reverse(char *str)
+int p_rev(char *str)
 {
     int i;
 
@@ -75,11 +75,11 @@ int print_reverse(char *str)
 }
 
 /**
- * print_rot13string - prints a ROT13 encrypted string.
+ * p_rt13str - prints a ROT13 encrypted string.
  * @str: string to be encrypted.
  * Return: length of the printed string.
  */
-int print_rot13string(char *str)
+int p_rt13str(char *str)
 {
     char x;
     char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
