@@ -7,81 +7,107 @@
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024
 
-/* FLAGS */
+/* flags manager */
 #define F_MINUS 1
 #define F_PLUS 2
 #define F_ZERO 4
 #define F_HASH 8
 #define F_SPACE 16
 
-/* SIZES */
+/* size manager */
 #define S_LONG 2
 #define S_SHORT 1
 
 /**
- * struct fmt - Struct op
- *
- * @fmt: The format.
- * @fn: The function associated.
+ * struct frmt - structure Declaration
+ * @frmt: The format specification
+ * @kk: expected function
  */
-struct fmt
+struct frmt
 {
-	char fmt;
-	int (*fn)(va_list, char[], int, int, int, int);
+	char frmt;
+	int (*kk)(va_list, char[], int, int, int, int);
 };
 
-
 /**
- * typedef struct fmt fmt_t - Struct op
+ * typedef struct frmt frmt_t - structure Declaration
  *
- * @fmt: The format.
- * @fm_t: The function associated.
+ * @frmt: Definition format.
+ * @frmt_t: expected function
  */
-typedef struct fmt fmt_t;
+typedef struct frmt frmt_t;
 
 int _printf(const char *format, ...);
-int handle_print(const char *fmt, int *i,
-va_list list, char buffer[], int flags, int width, int precision, int size);
+int all_handle(const char *frmt, int *i,
+va_list lst, char buf[], int flg, int wdth, int pre, int s);
 
-/****************** FUNCTIONS ******************/
+/*________________All_functions________________________*/
 
-/* Funtions to print chars and strings */
-int print_char(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_string(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_percent(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+/* funtion to console char and str */
+int p_char(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_str(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_percent(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
 
-/* Functions to print numbers */
-int print_int(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_binary(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_unsigned(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_octal(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_hexadecimal(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_hexa_upper(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+/* functions to console numbers */
+int p_int(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_binary(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_unsigned(va_list types, char buf[],
+	int flg, int wdth, int pre int s);
+int p_octal(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_hexdec(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+int p_hex_up(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
 
-int print_hexa(va_list types, char map_to[],
-char buffer[], int flags, char flag_ch, int width, int precision, int size);
+int p_hexa(va_list types, char map_to[],
+char buf[], int flg, char flg_ch, int wdth, int pre, int s);
 
-/* Function to print non printable characters */
-int print_non_printable(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+/* function to console all non printable characters */
+int p_non_pr_able(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
 
-/* Funcion to print memory address */
-int print_pointer(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+/* funcion to console all memory address */
+int p_pointer(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
 
-/* Funciotns to handle other specifiers */
-int g_flag(const char *frmt, int *x);
-int g_width(const char *frmt, int *x, va_list lst);
-int g_precision(const char *frmt, int *x, va_list lst);
-int g_size(const char *frmt, int *x);
+/* funciotns to manage other specifiers */
+int g_flg(const char *frmt, int *x);
+int g_wdth(const char *frmt, int *x, va_list lst);
+int g_pre(const char *frmt, int *x, va_list lst);
+int g_s(const char *frmt, int *x);
 
+/*function that console all str in rev*/
+int p_rev(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+
+/*function that console a str in rot 13*/
+int p_rt13str(va_list types, char buf[],
+	int flg, int wdth, int pre, int s);
+
+/* width control manager*/
+int all_handle_manager(char c, char buf[],
+	int flg, int wdth, int pre, int s);
+int Enter_num(int is_pos, int i, char buf[],
+	int flg, int wdth, int pre, int s);
+int Entered_num(int i, char buf[], int flg, int wdth, int pre,
+	int len, char pdd, char ext_c);
+int Entered_pointer(char buf[], int i, int len,
+	int wdth, int flg, char pdd, char ext_c, int pd_stat);
+
+int Enter_unsgnd(int is_neg, int i, char buf[], int flg,
+		int wdth, int pre, int s);
+
+/*___________ utils _________________*/
+int is_consolable(char);
+int appending_hex_code(char, char[], int);
+int is_digit(char);
+
+long int convert_s_num(long int num, int s);
+long int convert_s_unsigned(unsigned long int num, int s);
 #endif
