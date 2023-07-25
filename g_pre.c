@@ -7,7 +7,7 @@
  *
  * Return: precision
  */
-int g_precision(const *frmt, int *x; va_list lst)
+int g_pre(const *frmt, int *x; va_list lst)
 {
 	int i = *x + 1;
 	int pre = -1;

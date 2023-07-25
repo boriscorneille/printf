@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * g_width - Calc width for printing
+ * g_wdth - Calc width for printing
  * @frmt: formatted string .
  * @x: list of arguments to be printed.
  * @lst: list of arguments.
  *
  * Return: width.
  */
-int g_width(const char *frmt, int *x, va_list lst)
+int g_wdth(const char *frmt, int *x, va_list lst)
 {
 	int i;
 	int w = 0;

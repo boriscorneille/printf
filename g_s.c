@@ -8,7 +8,7 @@
  * i: index
  * Return: precision.
  */
-int g_size(const char *frmt, int *x)
+int g_s(const char *frmt, int *x)
 {
 	int i = *x + 1;
 	int s = 0;

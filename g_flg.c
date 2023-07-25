@@ -5,7 +5,7 @@
  * @x: take a parameter
  * Return: flag
  */
-int g_flag(const char *frmt, int *x)
+int g_flg(const char *frmt, int *x)
 {
 
 	int k, i;
