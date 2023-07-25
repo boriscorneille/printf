@@ -9,56 +9,56 @@
  */
 int _printf(const char *format, ...)
 {
-    int i, printed = 0, printed_chars = 0;
-    int flags, width, precision, size, buff_ind = 0;
-    va_list list;
-    char buffer[BUFF_SIZE];
+    int i, print = 0, p_char = 0;
+    int flg, wdth, pre, s, buf_i = 0;
+    va_list lst;
+    char buf[BUFF_SIZE];
 
-    if (format == NULL)
+    if (frmt == NULL)
         return (-1);
 
-    va_start(list, format);
+    va_start(lst, frmt);
 
-    for (i = 0; format && format[i] != '\0'; i++) {
-        if (format[i] != '%') {
-            buffer[buff_ind++] = format[i];
+    for (i = 0; frmt && frmt[i] != '\0'; i++) {
+        if (frmt[i] != '%') {
+            buf[buf_i++] = frmt[i];
             if (buff_ind == BUFF_SIZE) {
-                print_buffer(buffer, &buff_ind);
+                p_buf(buf, &buf_i);
             }
-            printed_chars++;
+            p_char++;
         } else {
-            print_buffer(buffer, &buff_ind);
-            flags = get_flags(format, &i);
-            width = get_width(format, &i, list);
-            precision = get_precision(format, &i, list);
-            size = get_size(format, &i);
+            p_buf(buf, &buf_i);
+            flg = g_flg(frmt, &x);
+            wdth = g_wdth(frmt, &x, lst);
+            pre = g_pre(frmt, &x, lst);
+            s = g_s(frmt, &x);
             ++i;
-            printed = handle_print(format, &i, list, buffer,
-                flags, width, precision, size);
-            if (printed == -1) {
+            print = all_handle(frmt, &i, lst, buf,
+                flg, wdth, pre, s);
+            if (print == -1) {
                 return (-1);
             }
-            printed_chars += printed;
+            p_char += print;
         }
     }
 
-    print_buffer(buffer, &buff_ind);
+    p_buf(buf, &buf_i);
 
-    va_end(list);
+    va_end(lst);
 
-    return (printed_chars);
+    return (p_char);
 }
 
 /**
- * print_buffer - Prints the contents of the buffer to the standard output.
- * @buffer: The character buffer containing the text to be printed.
- * @buff_ind: The current index in the buffer.
+ * p_buf - Prints the contents of the buffer to the standard output.
+ * @buf: The character buffer containing the text to be printed.
+ * @buf_i: The current index in the buffer.
  */
-void print_buffer(char buffer[], int *buff_ind)
+void p_buf(char buf[], int *buf_i)
 {
-    if (*buff_ind > 0) {
-        write(1, &buffer[0], *buff_ind);
+    if (*buf_i > 0) {
+        write(1, &buf[0], *buf_i);
     }
 
-    *buff_ind = 0;
+    *buf_i = 0;
 }
