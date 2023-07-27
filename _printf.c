@@ -14,26 +14,26 @@ int _printf(const char *format, ...)
     va_list lst;
     char buf[BUFF_SIZE];
 
-    if (frmt == NULL)
+    if (format == NULL)
         return (-1);
 
-    va_start(lst, frmt);
+    va_start(lst, format);
 
-    for (i = 0; frmt && frmt[i] != '\0'; i++) {
-        if (frmt[i] != '%') {
-            buf[buf_i++] = frmt[i];
+    for (i = 0; format && format[i] != '\0'; i++) {
+        if (format[i] != '%') {
+            buf[buf_i++] = format[i];
             if (buff_ind == BUFF_SIZE) {
                 p_buf(buf, &buf_i);
             }
             p_char++;
         } else {
             p_buf(buf, &buf_i);
-            flg = g_flg(frmt, &x);
-            wdth = g_wdth(frmt, &x, lst);
-            pre = g_pre(frmt, &x, lst);
-            s = g_s(frmt, &x);
+            flg = g_flg(format, &x);
+            wdth = g_wdth(format, &x, lst);
+            pre = g_pre(format, &x, lst);
+            s = g_s(format, &x);
             ++i;
-            print = all_handle(frmt, &i, lst, buf,
+            print = all_handle(format, &i, lst, buf,
                 flg, wdth, pre, s);
             if (print == -1) {
                 return (-1);

@@ -8,11 +8,11 @@
 #define BUFF_SIZE 1024
 
 /* flags manager */
-#define F_MINUS 1
-#define F_PLUS 2
-#define F_ZERO 4
-#define F_HASH 8
-#define F_SPACE 16
+#define FG_MINUS 1
+#define FG_PLUS 2
+#define FG_ZERO 4
+#define FG_HASH 8
+#define FG_SPACE 16
 
 /* size manager */
 #define S_LONG 2
@@ -57,7 +57,7 @@ int p_int(va_list types, char buf[],
 int p_binary(va_list types, char buf[],
 	int flg, int wdth, int pre, int s);
 int p_unsigned(va_list types, char buf[],
-	int flg, int wdth, int pre int s);
+	int flg, int wdth, int pre, int s);
 int p_octal(va_list types, char buf[],
 	int flg, int wdth, int pre, int s);
 int p_hexdec(va_list types, char buf[],
@@ -69,11 +69,11 @@ int p_hexa(va_list types, char map_to[],
 char buf[], int flg, char flg_ch, int wdth, int pre, int s);
 
 /* function to console all non printable characters */
-int p_non_pr_able(va_list types, char buf[],
+int pr_non_pr_able(va_list types, char buf[],
 	int flg, int wdth, int pre, int s);
 
 /* funcion to console all memory address */
-int p_pointer(va_list types, char buf[],
+int pr_pointer(va_list types, char buf[],
 	int flg, int wdth, int pre, int s);
 
 /* funciotns to manage other specifiers */
@@ -100,7 +100,7 @@ int Entered_num(int i, char buf[], int flg, int wdth, int pre,
 int Entered_pointer(char buf[], int i, int len,
 	int wdth, int flg, char pdd, char ext_c, int pd_stat);
 
-int Enter_unsgnd(int is_neg, int i, char buf[], int flg,
+int Enter_unsigned(int is_neg, int i, char buf[], int flg,
 		int wdth, int pre, int s);
 
 /*___________ utils _________________*/

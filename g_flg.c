@@ -9,17 +9,17 @@ int g_flg(const char *frmt, int *x)
 {
 
 	int k, i;
-	int flag = 0;
-	const char flag_characters[] = {'-', '+', '0', '#', '', '\0'};
-	const int flag_value[] = {fg_MINUS, fg_PLUS, fg_ZERO, fg_HASH, fg_SPACE, 0};
+	int flg = 0;
+	const char flag_characters[] = {'-', '+', '0', '#', ' ', '\0'};
+	const int flg_val[] = {FG_MINUS, FG_PLUS, FG_ZERO, FG_HASH, FG_SPACE, 0};
 
-	for (i = *x + 1; frmt[x] != '\0'; i++)
+	for (i = *x + 1; frmt[i] != '\0'; i++)
 	{
-		for (k = 0; flag_characters[k]; != '\0'; k++)
+		for (k = 0; flag_characters[k] != '\0'; k++)
 		{
 			if (frmt[i] == flag_characters[k])
 			{
-				flag |= flag_valu[k];
+				flg |= flg_val[k];
 				break;
 			}
 		}
@@ -28,6 +28,6 @@ int g_flg(const char *frmt, int *x)
 	}
 	*x = i - 1;
 
-	return (flag);
+	return (flg);
 
 }

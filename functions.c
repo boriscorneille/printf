@@ -46,7 +46,7 @@ int p_unsigned(va_list types, char buf[],
  * Return: The number of characters printed
  */
 int p_octal(va_list types, char buf[],
-        int flags, int wdth, int pre, int s)
+        int flg, int wdth, int pre, int s)
 {
         int i = BUFF_SIZE - 2;
         unsigned long int num = va_arg(types, unsigned long int);
@@ -61,12 +61,13 @@ int p_octal(va_list types, char buf[],
 
         buf[BUFF_SIZE - 1] = '\0';
 
-        while (num > 0) {
+        while (num > 0)
+	{
                 buf[i--] = (num % 8) + '0';
                 num /= 8;
-        }
+	}
 
-        if (flg & F_HASH && init_num != 0)
+        if (flg & FG_HASH && init_num != 0)
                 buf[i--] = '0';
 
         i++;
@@ -145,7 +146,7 @@ char buf[], int flg, char flg_ch, int wdth, int pre, int s)
                 num /= 16;
         }
 
-        if (flg & F_HASH && init_num != 0) {
+        if (flg & FG_HASH && init_num != 0) {
                 buf[i--] = flg_ch;
                 buf[i--] = '0';
         }
