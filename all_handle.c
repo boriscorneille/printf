@@ -19,7 +19,7 @@ int all_handle(const char *frmt, int *i, va_list lst, char buf[],
 		{'c', p_char}, {'s', p_str}, {'%', p_percent},
 		{'i', p_int}, {'d', p_int}, {'b', p_binary},
 		{'u', p_unsigned}, {'o', p_octal}, {'x', p_hexdec},
-		{'X', p_hex_up}, {'p', p_pointer}, {'S', p_non_pr_able},
+		{'X', p_hex_up}, {'p', pr_pointer}, {'S', pr_non_pr_able},
 		{'r', p_rev}, {'R', p_rt13str}, {'\0', NULL}
 	};
 for (x = 0; frmt_type[x].frmt != '\0'; x++)

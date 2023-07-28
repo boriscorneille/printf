@@ -9,7 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-    int i, print = 0, p_char = 0;
+    int x, print = 0, p_char = 0;
     int flg, wdth, pre, s, buf_i = 0;
     va_list lst;
     char buf[BUFF_SIZE];
@@ -19,10 +19,10 @@ int _printf(const char *format, ...)
 
     va_start(lst, format);
 
-    for (i = 0; format && format[i] != '\0'; i++) {
-        if (format[i] != '%') {
-            buf[buf_i++] = format[i];
-            if (buff_ind == BUFF_SIZE) {
+    for (x = 0; format && format[x] != '\0'; x++) {
+        if (format[x] != '%') {
+            buf[buf_i++] = format[x];
+            if (buf_i == BUFF_SIZE) {
                 p_buf(buf, &buf_i);
             }
             p_char++;
@@ -32,8 +32,8 @@ int _printf(const char *format, ...)
             wdth = g_wdth(format, &x, lst);
             pre = g_pre(format, &x, lst);
             s = g_s(format, &x);
-            ++i;
-            print = all_handle(format, &i, lst, buf,
+            ++x;
+            print = all_handle(format, &x, lst, buf,
                 flg, wdth, pre, s);
             if (print == -1) {
                 return (-1);

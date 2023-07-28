@@ -1,4 +1,5 @@
 #include "main.h"
+#include "string.h"
 
 /**
  * p_pointer - prints a pointer value.
@@ -46,7 +47,7 @@ int p_non_pr_able(char *str)
             write(1, &str[i], 1);
         else
         {
-            offset = appending_hex_code(str[i], buffer, i);
+            offset = appending_hex_code(str[i], setbuffer, i);
             write(1, buffer, offset);
         }
     }

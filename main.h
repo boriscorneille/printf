@@ -75,6 +75,7 @@ int pr_non_pr_able(va_list types, char buf[],
 /* funcion to console all memory address */
 int pr_pointer(va_list types, char buf[],
 	int flg, int wdth, int pre, int s);
+void p_buf(char buf[], int *buf_i);
 
 /* funciotns to manage other specifiers */
 int g_flg(const char *frmt, int *x);

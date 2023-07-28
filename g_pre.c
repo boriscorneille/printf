@@ -30,6 +30,7 @@ for (i += 1; frmt[i] != '\0'; i++)
 	}
 	else
 		break;
+}
 *x = i - 1;
 return (pre);
 }
